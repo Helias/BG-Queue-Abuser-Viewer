@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="abuserViewer">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.6, user-scalable=no">
+    <meta name="description" content="BG Queue Abuser Viewer">
+    <meta name="author" content="Helias">
+
+    <title>BG Queue Abuser Viewer</title>
+
+    <!-- Javascript -->
+    <script src="js/lib/angular.min.js"></script>
+    <script src="js/lib/angular-ui-router.min.js"></script>
+    <script src="js/lib/angular-animate.js"></script>
+    <script src="js/lib/angular-tablesort.js"></script>
+    <script src="js/lib/ui-bootstrap.min.js"></script>
+    <script src="js/lib/loading-bar.min.js"></script>
+    <script src="js/app/app.js"></script>
+    <script src="js/app/routes.js"></script>
+    <script src="config.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/tablesort.css">
+    <link rel="stylesheet" href="css/loading-bar.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <!--[if IE]>
+    <script src="https://cdn.jsdelivr.net/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <a href="#/0/">
+            <p class="h1 text-center">BG Queue Abuser Viewer</p>
+          </a>
+          <br>
+
+          <uib-accordion>
+            <uib-accordion-group is-open="status">
+              <uib-accordion-heading>
+                Legenda <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status, 'glyphicon-chevron-right': !status}"></i>
+              </uib-accordion-heading>
+              <table class="legenda">
+                <tr>
+                  <td><figure class="circle circle-blue"></figure></td>
+                  <td>&nbsp; il giocatore abbandona il BG <b class="type0">(deserter)</b></td>
+                </tr>
+                <tr>
+                  <td><figure class="circle circle-grey"></figure></td>
+                  <td>&nbsp;  il giocatore è stato buttato fuori dal BG dopo essere stato offline per un certo numero di minuti <b class="type1">(deserter oppure player crashato)</b></td>
+                </tr>
+                <tr>
+                  <td><figure class="circle circle-red"></figure></td>
+                  <td>&nbsp;  il giocatore è stato invitato a joinare il BG ma si rifiuta esplicitamente di farlo, cliccando nel pulsante <b class="type2">(queue abuser)</b></td>
+                </tr>
+                <tr>
+                  <td><figure class="circle circle-orange"></figure></td>
+                  <td>&nbsp; il giocatore è stato invitato a joinare il BG ma non preme nessun pulsante e scade il tempo <b class="type3">(AFK oppure queue abuser)</b></td>
+                </tr>
+                <tr>
+                  <td><figure class="circle circle-yellow"></figure></td>
+                  <td>&nbsp;  il giocatore è stato invitato a joinare BG ed in quel momento slogga <b class="type4">(queue abuser, oppure per una rara coincidenza il player deve sloggare proprio in quel momento)</b></td>
+                </tr>
+              </table>
+
+            </uib-accordion-group>
+          </uib-accordion>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-6">
+          <input type="text" placeholder="Search character..." class="search-input" ng-model="search">
+          <a ng-href="#/{{ from }}/{{ search }}">
+            <button class="search arrow-right"><span class="glyphicon glyphicon-search"></span></button>
+          </a>
+        </div>
+
+        <div class="col-xs-6">
+          <div class="text-right">
+            <a ng-href="#/{{ (from - 50 > 0 ? from-50 : 0) }}/{{ search }}">
+              <button class="arrow arrow-left">
+                <i class="pull-right glyphicon glyphicon-chevron-left"></i>
+              </button>
+            </a>
+              <b class="text-align">&nbsp; {{ from + " - " + (from-(-50)) }} &nbsp;</b>
+            <a ng-href="#/{{ 50-(-from) }}/{{ search }}">
+              <button class="arrow arrow-right">
+                <i class="pull-right glyphicon glyphicon-chevron-right"></i>
+              </button>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="raw">
+        <div class="col-xs-12">
+
+          <div ui-view></div>
+          <hr>
+          <p class="text-center credits">Created by <a target="_blank" href="https://github.com/Helias"><strong>Helias</strong></a></p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
