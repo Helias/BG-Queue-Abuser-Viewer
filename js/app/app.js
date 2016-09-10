@@ -18,10 +18,11 @@
       $scope.players = data;
 
       for (var i = 0; i < $scope.players.length; i++) {
+        console.log($scope.players[i].type);
         switch($scope.players[i].type) {
           case 0:
-          $scope.players[i].status = "blue";
-          $scope.players[i].popover = "il giocatore abbandona il BG (deserter)";
+            $scope.players[i].status = "blue";
+            $scope.players[i].popover = "il giocatore abbandona il BG (deserter)";
           break;
           case 1:
             $scope.players[i].status = "grey";
@@ -40,6 +41,7 @@
             $scope.players[i].popover = "il giocatore è stato invitato a joinare BG ed in quel momento slogga (queue abuser, oppure per una rara coincidenza il player deve sloggare proprio in quel momento)";
           break;
         }
+        console.log($scope.players[i].type + " " + $scope.players[i].status);
       }
     })
       .error(function (data, status, header, config) {
