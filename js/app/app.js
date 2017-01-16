@@ -12,7 +12,7 @@
 
      $rootScope.search = $rootScope.name;
 
-    /* Retrieve all achievement_progress data */
+    /* Retrieve all battleground deserters data */
     $http.get( app.api + "battleground/deserters/recent/50?from=" + $rootScope.from + "&name=" + $rootScope.name)
       .success(function (data, status, header, config) {
       $scope.players = data;
