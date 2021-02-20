@@ -1,7 +1,7 @@
 (function () {
   var app = angular.module('abuserViewer');
 
-  /* Edit with path of TC-JSON-API */
+  /* Edit with path of your AzerothCore API or TC-JSON-API */
   app.api = "http://your.api.com/API/";
 
 })();
