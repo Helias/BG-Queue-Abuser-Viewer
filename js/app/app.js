@@ -5,7 +5,7 @@
 
   app.controller('playerController', function($rootScope, $scope, $http, $stateParams) {
 
-    $rootScope.status = false;
+    $rootScope.status = true;
 
      $rootScope.from = $stateParams.from == null ? 0 : $stateParams.from;
      $rootScope.name = $stateParams.name == null ? '' : $stateParams.name;
