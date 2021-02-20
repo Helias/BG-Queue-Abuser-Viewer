@@ -13,7 +13,7 @@
      $rootScope.search = $rootScope.name;
 
     /* Retrieve all battleground deserters data */
-    $http.get( app.api + "battleground/deserters/recent/50?from=" + $rootScope.from + "&name=" + $rootScope.name)
+    $http.get( app.api + "characters/battleground_deserters/50?from=" + $rootScope.from + "&name=" + $rootScope.name)
       .success(function (data, status, header, config) {
       $scope.players = data;
 
@@ -21,23 +21,23 @@
         switch(parseInt($scope.players[i].type)) {
           case 0:
             $scope.players[i].status = "blue";
-            $scope.players[i].popover = "il giocatore abbandona il BG (deserter)";
+            $scope.players[i].popover = "the player abandoned the BG (deserter)";
           break;
           case 1:
             $scope.players[i].status = "grey";
-            $scope.players[i].popover = "il giocatore è stato buttato fuori dal BG dopo essere stato offline per un certo numero di minuti (deserter oppure player crashato)";
+            $scope.players[i].popover = "the player is kicked out from the BG after being offline (deserter or player crashed)";
           break;
           case 2:
             $scope.players[i].status = "red";
-            $scope.players[i].popover = "il giocatore è stato invitato a joinare il BG ma si rifiuta esplicitamente di farlo, cliccando nel pulsante (queue abuser)";
+            $scope.players[i].popover = "the player is invited to join BG but he refused, he clicked Leave Queue (queue abuser)";
           break;
           case 3:
             $scope.players[i].status = "orange";
-            $scope.players[i].popover = "il giocatore è stato invitato a joinare il BG ma non preme nessun pulsante e scade il tempo (AFK oppure queue abuser)";
+            $scope.players[i].popover = "the player is invited to join BG but he doesn't click on any button and the time expires (AFK or queue abuser)";
           break;
           case 4:
             $scope.players[i].status = "yellow";
-            $scope.players[i].popover = "il giocatore è stato invitato a joinare BG ed in quel momento slogga (queue abuser, oppure per una rara coincidenza il player deve sloggare proprio in quel momento)";
+            $scope.players[i].popover = "the player is invited to join BG but in that time he logs out (queue abuser or the player just logged out)";
           break;
         }
       }

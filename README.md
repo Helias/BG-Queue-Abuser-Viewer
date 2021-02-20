@@ -1,6 +1,6 @@
 # BG Queue Abuser Viewer
 
-This tool works with the [TC-JSON-API](https://github.com/ShinDarth/TC-JSON-API.git) and it is compatible with [AzerothCore](https://github.com/azerothcore/azerothcore-wotlk) and [TrinityCore](https://github.com/TrinityCore/TrinityCore).
+This tool works with the [TC-JSON-API](https://github.com/ShinDarth/TC-JSON-API.git) and with [AzerothCore API](https://github.com/azerothcore/API).
 
 # ![BG Queue Abuser Viewer](https://raw.githubusercontent.com/Helias/BG-Queue-Abuser-Viewer/master/img/screen.png)
 
