@@ -74,11 +74,18 @@
       </div>
 
       <div class="row">
-        <div class="col-xs-6">
-          <input type="text" placeholder="Search character..." class="search-input" ng-model="search">
+        <div class="col-xs-3">
+          <input type="text" placeholder="Search character..." class="search-input" ng-model="search" ng-change="updateSearch(search)">
           <a ng-href="#/{{ from }}/{{ search }}">
             <button class="search arrow-right"><span class="glyphicon glyphicon-search"></span></button>
           </a>
+        </div>
+
+        <div class="col-xs-3">
+          <form ng-submit="updateQuery()">
+            Rows: <input type="value" class="search-input" placeholder="50" ng-model="rows">
+            <button class="search arrow-right text-success" OnClick="updateQuery()"><span class="glyphicon glyphicon-search"></span></button>
+          </form>
         </div>
 
         <div class="col-xs-6">
