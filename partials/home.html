@@ -15,8 +15,8 @@
         </thead>
         <tbody>
           <tr ng-repeat="player in players track by $index" ts-repeat>
-            <td class="text-danger">{{ player.guid }}</td>
-            <td class="text-danger">{{ player.account }}</td>
+            <td>{{ player.guid }}</td>
+            <td>{{ player.account }}</td>
             <td class="text-info">{{ player.name }}</td>
             <td>{{ player.level }}</td>
             <td class="text-center"><figure class="circle circle-{{ player.status }}" uib-popover="{{ player.popover }}" popover-trigger="mouseenter"></figure></td>
