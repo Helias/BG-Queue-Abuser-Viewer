@@ -1,8 +1,12 @@
 .toolbar {
-  justify-content: center;
+  justify-content: space-between;
 
   &__title {
     font-size: 2em;
     padding: 0.25em;
   }
+}
+
+.table {
+  width: 100%;
 }

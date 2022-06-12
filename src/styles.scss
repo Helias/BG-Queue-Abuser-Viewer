@@ -2,3 +2,7 @@
 @use '@angular/material' as mat;
 
 @include mat.core();
+
+body {
+  background-color: #14213d;
+}
