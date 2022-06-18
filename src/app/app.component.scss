@@ -1,12 +1,37 @@
 .toolbar {
   justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 1;
 
   &__title {
     font-size: 2em;
     padding: 0.25em;
   }
+
+  &__options {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 }
 
-.table {
-  width: 100%;
+.table-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px 0;
+  position: sticky;
+  top: 0;
+  left: 0;
+
+  .table {
+    width: 80%;
+  }
+}
+
+.legend-button {
+  position: sticky;
+  bottom: 0;
+  left: 100%;
 }

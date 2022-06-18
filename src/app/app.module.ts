@@ -8,6 +8,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort'; 
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 import { AppComponent } from './app.component';
 
@@ -23,6 +25,8 @@ import { AppComponent } from './app.component';
     MatToolbarModule,
     MatTableModule,
     MatSortModule,
+    MatIconModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

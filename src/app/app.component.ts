@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { MatSort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -16,25 +18,38 @@ export class AppComponent implements AfterViewInit {
   dataSource: MatTableDataSource<Row> = new MatTableDataSource<Row>(this.currentData);
 
   @ViewChild(MatTable) table!: MatTable<Row>;
+  @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private http: HttpClient) {}
 
   ngAfterViewInit() {
-    this.getData();
-    this.refreshTable();
+    this.dataSource.sort = this.sort;
+
+    this.onPageChange(0);
   }
 
-  getData(pageIndex: number = 0) {
-    // this.http.get(``).subscribe(res => {});
+  getData(pageIndex: number) {
+    return this.http
+      .get(
+          `api/characters/battleground_deserters/${this.entriesPerPage}?from=${
+            pageIndex * this.entriesPerPage
+          }&name=${''}`
+      )
+      .pipe(
+        tap(res => {
+          this.currentData = res as Row[];
+        })
+      );
   }
 
   refreshTable() {
-    this.table.renderRows();
+    this.dataSource.data = this.currentData;
   }
 
   onPageChange(pageIndex: number) {
-    this.getData(pageIndex);
-    this.refreshTable();
+    this.getData(pageIndex).subscribe(() => {
+      this.refreshTable();
+    });
   }
 }
 
