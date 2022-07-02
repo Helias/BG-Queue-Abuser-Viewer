@@ -12,16 +12,17 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 
 import { AppComponent } from './app.component';
+import { FilterComponent } from './filter/filter.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent, FilterComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
     MatToolbarModule,
     MatTableModule,
     MatSortModule,
