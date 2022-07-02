@@ -3,6 +3,8 @@
 
 @include mat.core();
 
+@import './variables.scss';
+
 body {
-  background-color: #14213d;
+  background-color: $background;
 }

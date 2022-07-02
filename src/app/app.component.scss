@@ -1,12 +1,19 @@
-.toolbar {
-  justify-content: space-between;
+@import '../variables.scss';
+
+$padding: 0.25rem;
+
+.header {
   position: sticky;
   top: 0;
   z-index: 1;
+}
+
+.toolbar {
+  justify-content: space-around;
 
   &__title {
     font-size: 2em;
-    padding: 0.25em;
+    padding: $padding;
   }
 
   &__options {
@@ -21,12 +28,36 @@
   flex-direction: column;
   align-items: center;
   margin: 10px 0;
-  position: sticky;
-  top: 0;
-  left: 0;
 
   .table {
-    width: 80%;
+    width: 100%;
+  }
+}
+
+.dot {
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  box-shadow: inset 0 0 5px 0 rgba(0, 0, 0, 0.5);
+
+  &--red {
+    background-color: $red;
+  }
+
+  &--orange {
+    background-color: $orange;
+  }
+
+  &--yellow {
+    background-color: $yellow;
+  }
+
+  &--blue {
+    background-color: $blue;
+  }
+
+  &--grey {
+    background-color: $grey;
   }
 }
 
@@ -34,4 +65,28 @@
   position: sticky;
   bottom: 0;
   left: 100%;
+}
+
+.legend__grid {
+  display: grid;
+  grid-template-columns: auto max-content;
+  gap: 1em;
+  align-items: center;
+}
+
+.credits {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: $padding;
+  color: white;
+
+  > hr {
+    width: 100%;
+    color: $yellow;
+  }
+
+  > strong {
+    color: $yellow;
+  }
 }

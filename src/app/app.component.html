@@ -1,18 +1,76 @@
-<mat-toolbar class="toolbar">
-  <h1 class="toolbar__title">{{ title }}</h1>
-  <div class="toolbar__options"></div>
-</mat-toolbar>
-<div class="table-wrapper">
-<table class="table" mat-table matSort [dataSource]="dataSource">
-  <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header [sortActionDescription]="'Sort by ' + column">{{ column.toUpperCase() }}</th>
-    <td mat-cell *matCellDef="let element">{{ element[column] }}</td>
-  </ng-container>
-
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-</table>
+<div class="header">
+  <mat-toolbar class="toolbar" color="primary">
+    <h1 class="toolbar__title">{{ title }}</h1>
+    <div class="toolbar__options">
+      <app-filter (filterChange)="onFilterChange($event)"></app-filter>
+    </div>
+  </mat-toolbar>
+  <mat-progress-bar *ngIf="loading" class="progress-bar" mode="indeterminate"></mat-progress-bar>
 </div>
-<button class="legend-button" mat-mini-fab color="primary" aria-label="Legend button">
+<div class="table-wrapper">
+  <table class="table" mat-table matSort [dataSource]="dataSource">
+    <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        [sortActionDescription]="'Sort by ' + column"
+      >
+        {{ column.toUpperCase() }}
+      </th>
+      <div *ngIf="column !== 'type'">
+        <td mat-cell *matCellDef="let element">{{ element[column] }}</td>
+      </div>
+      <div *ngIf="column === 'type'">
+        <td mat-cell *matCellDef="let element">
+          <div
+            [ngClass]="{
+              dot: true,
+              'dot--red': typeColors[element[column]].color === 'red',
+              'dot--orange': typeColors[element[column]].color === 'orange',
+              'dot--yellow': typeColors[element[column]].color === 'yellow',
+              'dot--blue': typeColors[element[column]].color === 'blue',
+              'dot--grey': typeColors[element[column]].color === 'grey'
+            }"
+            [matTooltip]="typeColors[element[column]].tooltip"
+          ></div>
+        </td>
+      </div>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>
+
+<button
+  class="legend-button"
+  mat-mini-fab
+  color="primary"
+  aria-label="Legend button"
+  [matMenuTriggerFor]="menu"
+>
   <mat-icon class="material-symbols-outlined">legend_toggle</mat-icon>
 </button>
+
+<mat-menu #menu="matMenu" xPosition="before" yPosition="above">
+  <div class="legend__grid">
+    <div class="dot dot--red"></div>
+    <span>{{ typeColors[0].tooltip }}</span>
+    <div class="dot dot--orange"></div>
+    <span>{{ typeColors[1].tooltip }}</span>
+    <div class="dot dot--yellow"></div>
+    <span>{{ typeColors[2].tooltip }}</span>
+    <div class="dot dot--blue"></div>
+    <span>{{ typeColors[3].tooltip }}</span>
+    <div class="dot dot--grey"></div>
+    <span>{{ typeColors[4].tooltip }}</span>
+  </div>
+</mat-menu>
+
+<div class="credits">
+  <hr />
+  <strong>Created by:</strong>
+  <em>Helias</em>
+  <em>Lorenzo Pappalardo</em>
+</div>
