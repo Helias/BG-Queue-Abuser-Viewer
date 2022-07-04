@@ -29,6 +29,15 @@ export class AppComponent implements AfterViewInit {
   ]);
   readonly typeColors: readonly { color: string; tooltip: string }[] = Object.freeze([
     {
+      color: 'blue',
+      tooltip: 'The player abandoned the BG (deserter)'
+    },
+    {
+      color: 'grey',
+      tooltip:
+        'The player is kicked out from the BG after being offline (deserter or player crashed)'
+    },
+    {
       color: 'red',
       tooltip:
         'The player is invited to join BG but he refused, he clicked Leave Queue (queue abuser)'
@@ -42,15 +51,6 @@ export class AppComponent implements AfterViewInit {
       color: 'yellow',
       tooltip:
         'The player is invited to join BG but in that time he logs out (queue abuser or the player just logged out)'
-    },
-    {
-      color: 'blue',
-      tooltip: 'The player abandoned the BG (deserter)'
-    },
-    {
-      color: 'grey',
-      tooltip:
-        'The player is kicked out from the BG after being offline (deserter or player crashed)'
     }
   ]);
 
