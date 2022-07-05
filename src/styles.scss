@@ -8,3 +8,7 @@
 body {
   background-color: $background;
 }
+
+.mat-menu-panel {
+  max-width: none !important;
+}
