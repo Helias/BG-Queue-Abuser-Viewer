@@ -11,7 +11,7 @@ export class FilterComponent {
 
   currentPage = 1;
   entriesPerPage = 20;
-  nameFilter: string | undefined;
+  nameFilter?: string;
 
   onSubmit() {
     this.filterChange.emit({
@@ -25,5 +25,5 @@ export class FilterComponent {
 export interface FilterValue {
   currentPage: number;
   entriesPerPage: number;
-  nameFilter: string | undefined;
+  nameFilter?: string;
 }

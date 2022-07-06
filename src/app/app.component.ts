@@ -14,8 +14,7 @@ export class AppComponent implements AfterViewInit {
   private currentData: Row[] = [];
   private filterValue: FilterValue = {
     currentPage: 0,
-    entriesPerPage: 25,
-    nameFilter: undefined
+    entriesPerPage: 20
   };
 
   readonly title = 'BG Queue Abuser Viewer';
