@@ -1,0 +1,25 @@
+<button
+  class="legend-button"
+  mat-mini-fab
+  color="primary"
+  aria-label="Legend button"
+  [matMenuTriggerFor]="menu"
+>
+  <mat-icon class="material-symbols-outlined">legend_toggle</mat-icon>
+</button>
+
+<mat-menu #menu="matMenu" xPosition="before" yPosition="above">
+  <span class="legend__title">Legend</span>
+  <div class="legend__grid">
+    <div class="dot dot--blue"></div>
+    <span>{{ typeColors[0].tooltip }}</span>
+    <div class="dot dot--grey"></div>
+    <span>{{ typeColors[1].tooltip }}</span>
+    <div class="dot dot--red"></div>
+    <span>{{ typeColors[2].tooltip }}</span>
+    <div class="dot dot--orange"></div>
+    <span>{{ typeColors[3].tooltip }}</span>
+    <div class="dot dot--yellow"></div>
+    <span>{{ typeColors[4].tooltip }}</span>
+  </div>
+</mat-menu>
