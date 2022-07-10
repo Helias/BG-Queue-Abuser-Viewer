@@ -53,10 +53,21 @@ export class AppComponent implements AfterViewInit {
       )
       .pipe(
         tap(obj => {
-          this.currentData = (obj as APIResults[]).map((res, index) => ({
-            ...res,
-            position: index + 1 + this.filterValue.currentPage * this.filterValue.entriesPerPage
-          }));
+          this.currentData = (obj as APIResults[]).map((res, index) => {
+            const newRow = {
+              ...res,
+              position: index + 1 + this.filterValue.currentPage * this.filterValue.entriesPerPage
+            };
+
+            const datetime = new Date(newRow.datetime);
+            const formatter = Intl.DateTimeFormat(undefined, {
+              dateStyle: 'short',
+              timeStyle: 'long'
+            });
+            newRow.datetime = formatter.format(datetime);
+
+            return newRow;
+          });
         })
       );
   }
@@ -86,7 +97,7 @@ export class AppComponent implements AfterViewInit {
 interface APIResults {
   guid: number;
   type: number;
-  datetime: Date;
+  datetime: string;
   account: number;
   name: string;
   level: number;
