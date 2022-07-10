@@ -20,6 +20,7 @@ export class AppComponent implements AfterViewInit {
 
   readonly title = 'BG Queue Abuser Viewer';
   readonly displayedColumns: readonly (keyof Row)[] = Object.freeze([
+    'position',
     'guid',
     'account',
     'name',
@@ -51,8 +52,11 @@ export class AppComponent implements AfterViewInit {
         }${this.filterValue.nameFilter ? '&name=' + this.filterValue.nameFilter : ''}`
       )
       .pipe(
-        tap(res => {
-          this.currentData = res as Row[];
+        tap(obj => {
+          this.currentData = (obj as APIResults[]).map((res, index) => ({
+            ...res,
+            position: index + 1 + this.filterValue.currentPage * this.filterValue.entriesPerPage
+          }));
         })
       );
   }
@@ -79,7 +83,7 @@ export class AppComponent implements AfterViewInit {
   }
 }
 
-interface Row {
+interface APIResults {
   guid: number;
   type: number;
   datetime: Date;
@@ -89,4 +93,8 @@ interface Row {
   race: number;
   class: number;
   gender: number;
+}
+
+interface Row extends APIResults {
+  position: number;
 }
