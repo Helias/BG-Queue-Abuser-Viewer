@@ -17,9 +17,10 @@ import { MatMenuModule } from '@angular/material/menu';
 import { AppComponent } from './app.component';
 import { FilterComponent } from './filter/filter.component';
 import { FormsModule } from '@angular/forms';
+import { LegendComponent } from './legend/legend.component';
 
 @NgModule({
-  declarations: [AppComponent, FilterComponent],
+  declarations: [AppComponent, FilterComponent, LegendComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

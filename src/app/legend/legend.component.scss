@@ -1,0 +1,27 @@
+@import '../../variables.scss';
+
+$space: 10px;
+
+.legend {
+  &-button {
+    position: fixed;
+    bottom: $space;
+    right: $space;
+  }
+
+  &__title {
+    display: block;
+    margin-left: $space;
+    font-size: larger;
+    text-align: center;
+    color: $accent;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: auto max-content;
+    gap: 1em;
+    padding: $space;
+    color: $text-color;
+  }
+}
