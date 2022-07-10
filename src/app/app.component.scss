@@ -63,9 +63,9 @@ $padding: 10px;
 
 .legend {
   &-button {
-    position: sticky;
-    bottom: 0;
-    left: 100%;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
   }
 
   &__title {
