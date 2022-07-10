@@ -3,10 +3,23 @@
 
 @include mat.core();
 
-@import './variables.scss';
+$my-palette: mat.$teal-palette;
+$my-primary: mat.define-palette(mat.$teal-palette, 800, 300, 900);
+$my-accent: mat.define-palette(mat.$cyan-palette, A200, A100, A400);
+
+$my-theme: mat.define-dark-theme(
+  (
+    color: (
+      primary: $my-primary,
+      accent: $my-accent
+    )
+  )
+);
+
+@include mat.all-component-themes($my-theme);
 
 body {
-  background-color: $background;
+  margin: 0;
 }
 
 .mat-menu-panel {
