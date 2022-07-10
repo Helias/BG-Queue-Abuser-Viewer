@@ -8,41 +8,40 @@
     </mat-toolbar>
     <mat-progress-bar *ngIf="loading" class="progress-bar" mode="indeterminate"></mat-progress-bar>
   </div>
-  <div class="table-wrapper">
-    <table class="table" mat-table matSort [dataSource]="dataSource">
-      <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
-        <th
-          mat-header-cell
-          *matHeaderCellDef
-          mat-sort-header
-          [sortActionDescription]="'Sort by ' + column"
-        >
-          {{ column.toUpperCase() }}
-        </th>
-        <div *ngIf="column !== 'type'">
-          <td mat-cell *matCellDef="let element">{{ element[column] }}</td>
-        </div>
-        <div *ngIf="column === 'type'">
-          <td mat-cell *matCellDef="let element">
-            <div
-              [ngClass]="{
-                dot: true,
-                'dot--red': typeColors[element[column]].color === 'red',
-                'dot--orange': typeColors[element[column]].color === 'orange',
-                'dot--yellow': typeColors[element[column]].color === 'yellow',
-                'dot--blue': typeColors[element[column]].color === 'blue',
-                'dot--grey': typeColors[element[column]].color === 'grey'
-              }"
-              [matTooltip]="typeColors[element[column]].tooltip"
-            ></div>
-          </td>
-        </div>
-      </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-    </table>
-  </div>
+  <table class="table" mat-table matSort [dataSource]="dataSource">
+    <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        [sortActionDescription]="'Sort by ' + column"
+      >
+        {{ column.toUpperCase() }}
+      </th>
+      <div *ngIf="column !== 'type'">
+        <td mat-cell *matCellDef="let element">{{ element[column] }}</td>
+      </div>
+      <div *ngIf="column === 'type'">
+        <td mat-cell *matCellDef="let element">
+          <div
+            [ngClass]="{
+              dot: true,
+              'dot--red': typeColors[element[column]].color === 'red',
+              'dot--orange': typeColors[element[column]].color === 'orange',
+              'dot--yellow': typeColors[element[column]].color === 'yellow',
+              'dot--blue': typeColors[element[column]].color === 'blue',
+              'dot--grey': typeColors[element[column]].color === 'grey'
+            }"
+            [matTooltip]="typeColors[element[column]].tooltip"
+          ></div>
+        </td>
+      </div>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
 
   <div class="credits">
     <hr />
@@ -50,6 +49,6 @@
     <em>Helias</em>
     <em>Lorenzo Pappalardo</em>
   </div>
-</div>
 
-<app-legend></app-legend>
+  <app-legend></app-legend>
+</div>
