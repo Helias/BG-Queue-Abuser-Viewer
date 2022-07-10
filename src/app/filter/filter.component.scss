@@ -20,16 +20,18 @@
     color: white;
     background-color: $background;
     border: none;
+    border-radius: $border-radius;
 
     &--small {
       width: 3em;
+      border-radius: $border-radius;
     }
   }
 
   &__button {
     height: 35px;
     padding: 0.25em 0.5em;
-    border-radius: 0 35% 35% 0;
+    border-radius: $border-radius;
     color: $yellow;
     background-color: $background;
     border: none;
