@@ -1,10 +1,9 @@
-import { Component, EventEmitter, Output, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-filter',
   templateUrl: './filter.component.html',
-  styleUrls: ['./filter.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./filter.component.scss']
 })
 export class FilterComponent {
   @Output() filterChange = new EventEmitter<FilterValue>();
@@ -13,7 +12,7 @@ export class FilterComponent {
   entriesPerPage = 20;
   nameFilter?: string;
 
-  onSubmit() {
+  onSubmit(): void {
     this.filterChange.emit({
       currentPage: this.currentPage - 1, // Subtracting 1 to send correct page index
       entriesPerPage: this.entriesPerPage,
