@@ -45,14 +45,14 @@ export class AppComponent implements AfterViewInit {
 
   private getData(): Observable<Object> {
     return this.http
-      .get(
+      .get<APIResults[]>(
         `api/characters/battleground_deserters/${this.filterValue.entriesPerPage}?from=${
           this.filterValue.currentPage * this.filterValue.entriesPerPage
         }${this.filterValue.nameFilter ? '&name=' + this.filterValue.nameFilter : ''}`
       )
       .pipe(
         tap(obj => {
-          this.currentData = (obj as APIResults[]).map((res, index) => {
+          this.currentData = obj.map((res, index) => {
             const newRow: Row = {
               ...res,
               position: index + 1 + this.filterValue.currentPage * this.filterValue.entriesPerPage
