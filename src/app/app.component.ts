@@ -80,10 +80,16 @@ export class AppComponent implements AfterViewInit {
       this.loading = true;
     }
 
-    this.getData().subscribe(() => {
-      this.refreshTable();
-
-      this.loading = false;
+    this.getData().subscribe({
+      next: () => {
+        this.refreshTable();
+      },
+      error: e => {
+        console.error(e);
+      },
+      complete: () => {
+        this.loading = false;
+      }
     });
   }
 
