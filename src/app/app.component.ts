@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
-import { tap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { FilterValue } from './filter/filter.component';
 import { typeColors } from './legend/legend.component';
 
@@ -18,7 +18,6 @@ export class AppComponent implements AfterViewInit {
     entriesPerPage: 20
   };
 
-  readonly title = 'BG Queue Abuser Viewer';
   readonly displayedColumns: readonly (keyof Row)[] = Object.freeze([
     'position',
     'guid',
@@ -31,20 +30,20 @@ export class AppComponent implements AfterViewInit {
   readonly typeColors = typeColors;
 
   loading = true;
-  dataSource: MatTableDataSource<Row> = new MatTableDataSource<Row>(this.currentData);
+  dataSource = new MatTableDataSource<Row>(this.currentData);
 
   @ViewChild(MatTable) table!: MatTable<Row>;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private http: HttpClient) {}
+  constructor(private readonly http: HttpClient) {}
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
 
     this.getDataAndRefresh();
   }
 
-  private getData() {
+  private getData(): Observable<Object> {
     return this.http
       .get(
         `api/characters/battleground_deserters/${this.filterValue.entriesPerPage}?from=${
@@ -54,7 +53,7 @@ export class AppComponent implements AfterViewInit {
       .pipe(
         tap(obj => {
           this.currentData = (obj as APIResults[]).map((res, index) => {
-            const newRow = {
+            const newRow: Row = {
               ...res,
               position: index + 1 + this.filterValue.currentPage * this.filterValue.entriesPerPage
             };
@@ -72,11 +71,11 @@ export class AppComponent implements AfterViewInit {
       );
   }
 
-  private refreshTable() {
+  private refreshTable(): void {
     this.dataSource.data = this.currentData;
   }
 
-  private getDataAndRefresh() {
+  private getDataAndRefresh(): void {
     if (!this.loading) {
       this.loading = true;
     }
@@ -88,7 +87,7 @@ export class AppComponent implements AfterViewInit {
     });
   }
 
-  onFilterChange(value: FilterValue) {
+  onFilterChange(value: FilterValue): void {
     this.filterValue = value;
     this.getDataAndRefresh();
   }
