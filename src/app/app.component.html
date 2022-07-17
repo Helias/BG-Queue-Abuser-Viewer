@@ -25,14 +25,7 @@
       <div *ngIf="column === 'type'">
         <td mat-cell *matCellDef="let element">
           <div
-            [ngClass]="{
-              dot: true,
-              'dot--red': typeColors[element[column]].color === 'red',
-              'dot--orange': typeColors[element[column]].color === 'orange',
-              'dot--yellow': typeColors[element[column]].color === 'yellow',
-              'dot--blue': typeColors[element[column]].color === 'blue',
-              'dot--grey': typeColors[element[column]].color === 'grey'
-            }"
+            [ngClass]="['dot', 'dot--' + typeColors[element[column]].color]"
             [matTooltip]="typeColors[element[column]].tooltip"
           ></div>
         </td>
