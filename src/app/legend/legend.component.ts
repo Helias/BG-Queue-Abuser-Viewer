@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 export const typeColors: readonly { color: string; tooltip: string }[] = Object.freeze([
   {
@@ -31,8 +31,6 @@ export const typeColors: readonly { color: string; tooltip: string }[] = Object.
   templateUrl: './legend.component.html',
   styleUrls: ['./legend.component.scss']
 })
-export class LegendComponent implements OnInit {
+export class LegendComponent {
   readonly typeColors = typeColors;
-
-  ngOnInit(): void {}
 }
