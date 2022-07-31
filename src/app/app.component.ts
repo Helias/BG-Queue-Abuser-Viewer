@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
-import { Observable, tap } from 'rxjs';
-import { FilterValue } from './filter/filter.component';
+import { map, Observable } from 'rxjs';
+import { Filters, FilterService } from './filter/filter.service';
 import { typeColors } from './legend/legend.component';
 
 @Component({
@@ -13,10 +13,6 @@ import { typeColors } from './legend/legend.component';
 })
 export class AppComponent implements AfterViewInit {
   private currentData: Row[] = [];
-  private filterValue: FilterValue = {
-    currentPage: 0,
-    entriesPerPage: 20
-  };
 
   readonly displayedColumns: readonly (keyof Row)[] = Object.freeze([
     'position',
@@ -35,27 +31,44 @@ export class AppComponent implements AfterViewInit {
   @ViewChild(MatTable) table!: MatTable<Row>;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private readonly http: HttpClient) {}
+  constructor(private readonly http: HttpClient, private readonly filterService: FilterService) {}
 
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
 
-    this.getDataAndRefresh();
+    this.filterService.values$.pipe(map((filters: Filters) => this.getData(filters))).subscribe({
+      next: rows$ => {
+        rows$.subscribe(rows => {
+          this.currentData = rows;
+          this.refreshTable();
+
+          this.loading = false;
+        });
+      },
+      error: e => {
+        console.error(e);
+      }
+    });
   }
 
-  private getData(): Observable<Object> {
+  private getData(filters: Filters): Observable<Row[]> {
+    if (!this.loading) {
+      this.loading = true;
+    }
+
     return this.http
       .get<APIResults[]>(
-        `api/characters/battleground_deserters/${this.filterValue.entriesPerPage}?from=${
-          this.filterValue.currentPage * this.filterValue.entriesPerPage
-        }${this.filterValue.nameFilter ? '&name=' + this.filterValue.nameFilter : ''}`
+        'http://localhost:3000/' +
+          `api/characters/battleground_deserters/${filters.entriesPerPage}?from=${
+            (filters.currentPage - 1) * filters.entriesPerPage
+          }${filters.nameFilter ? '&name=' + filters.nameFilter : ''}`
       )
       .pipe(
-        tap(obj => {
-          this.currentData = obj.map((res, index) => {
+        map(obj => {
+          return obj.map((res, index) => {
             const newRow: Row = {
               ...res,
-              position: index + 1 + this.filterValue.currentPage * this.filterValue.entriesPerPage
+              position: index + 1 + (filters.currentPage - 1) * filters.entriesPerPage
             };
 
             const datetime = new Date(newRow.datetime);
@@ -73,29 +86,6 @@ export class AppComponent implements AfterViewInit {
 
   private refreshTable(): void {
     this.dataSource.data = this.currentData;
-  }
-
-  private getDataAndRefresh(): void {
-    if (!this.loading) {
-      this.loading = true;
-    }
-
-    this.getData().subscribe({
-      next: () => {
-        this.refreshTable();
-      },
-      error: e => {
-        console.error(e);
-      },
-      complete: () => {
-        this.loading = false;
-      }
-    });
-  }
-
-  onFilterChange(value: FilterValue): void {
-    this.filterValue = value;
-    this.getDataAndRefresh();
   }
 }
 

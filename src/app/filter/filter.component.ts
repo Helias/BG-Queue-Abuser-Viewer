@@ -1,4 +1,6 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { Filters, FilterService } from './filter.service';
 
 @Component({
   selector: 'app-filter',
@@ -6,23 +8,27 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./filter.component.scss']
 })
 export class FilterComponent {
-  @Output() filterChange = new EventEmitter<FilterValue>();
+  filterForm: FormGroup;
 
-  currentPage = 1;
-  entriesPerPage = 20;
-  nameFilter?: string;
+  constructor(private readonly filterService: FilterService) {
+    const filterValues: Filters = this.filterService.values$.value;
 
-  onSubmit(): void {
-    this.filterChange.emit({
-      currentPage: this.currentPage - 1, // Subtracting 1 to send correct page index
-      entriesPerPage: this.entriesPerPage,
-      nameFilter: this.nameFilter
+    this.filterForm = new FormGroup({
+      currentPage: new FormControl(filterValues.currentPage),
+      entriesPerPage: new FormControl(filterValues.entriesPerPage),
+      nameFilter: new FormControl(filterValues.nameFilter)
     });
   }
-}
 
-export interface FilterValue {
-  currentPage: number;
-  entriesPerPage: number;
-  nameFilter?: string;
+  updateFilters(): void {
+    const formValue: Filters = this.filterForm.value;
+
+    const newValue: Filters = {
+      currentPage: formValue.currentPage,
+      entriesPerPage: formValue.entriesPerPage,
+      nameFilter: formValue.nameFilter
+    };
+
+    this.filterService.setState(newValue);
+  }
 }

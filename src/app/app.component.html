@@ -3,7 +3,7 @@
     <mat-toolbar class="toolbar" color="primary">
       <h1 class="toolbar__title">BG Queue Abuser Viewer</h1>
       <div class="toolbar__options">
-        <app-filter (filterChange)="onFilterChange($event)"></app-filter>
+        <app-filter></app-filter>
       </div>
     </mat-toolbar>
     <mat-progress-bar *ngIf="loading" class="progress-bar" mode="indeterminate"></mat-progress-bar>
