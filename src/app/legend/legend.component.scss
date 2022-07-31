@@ -17,11 +17,19 @@ $space: 10px;
     color: $accent;
   }
 
-  &__grid {
-    display: grid;
-    grid-template-columns: auto max-content;
-    gap: 1em;
+  &__flex {
+    display: flex;
+    flex-direction: column;
     padding: $space;
     color: $text-color;
+  }
+
+  &__dot-wrapper {
+    display: flex;
+    align-items: center;
+
+    > .dot {
+      margin: $space / 2 $space $space / 2 0;
+    }
   }
 }
