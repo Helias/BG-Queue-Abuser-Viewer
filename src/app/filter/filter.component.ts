@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Filters, FilterService } from './filter.service';
+import { Filters } from './filter.model';
+import { FilterService } from './filter.service';
 
 @Component({
   selector: 'app-filter',

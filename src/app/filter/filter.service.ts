@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { Filters } from './filter.model';
 
 @Injectable({
   providedIn: 'root'
@@ -21,10 +22,4 @@ export class FilterService {
       nameFilter: filter.nameFilter
     });
   }
-}
-
-export interface Filters {
-  currentPage: number;
-  entriesPerPage: number;
-  nameFilter?: string;
 }
