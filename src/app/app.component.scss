@@ -46,8 +46,17 @@ $padding: 10px;
   > strong {
     color: $yellow;
   }
+
+  > a {
+    text-decoration: none;
+  }
+
+  > a:link,
+  a:visited {
+    color: inherit;
+  }
 }
 
 .mat-row:nth-child(odd) {
-  background-color: rgba(255,255,255, .1);
+  background-color: rgba(255, 255, 255, 0.1);
 }
