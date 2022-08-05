@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Filters } from './filter.model';
+import { Filters, FiltersFormGroup } from './filter.model';
 import { FilterService } from './filter.service';
 
 @Component({
@@ -14,22 +14,15 @@ export class FilterComponent {
   constructor(private readonly filterService: FilterService) {
     const filterValues: Filters = this.filterService.values$.value;
 
-    this.filterForm = new FormGroup({
-      currentPage: new FormControl(filterValues.currentPage),
-      entriesPerPage: new FormControl(filterValues.entriesPerPage),
-      nameFilter: new FormControl(filterValues.nameFilter)
+    this.filterForm = new FormGroup<FiltersFormGroup>({
+      currentPage: new FormControl<Filters['currentPage']>(filterValues.currentPage),
+      entriesPerPage: new FormControl<Filters['entriesPerPage']>(filterValues.entriesPerPage),
+      nameFilter: new FormControl<Filters['nameFilter']>(filterValues.nameFilter)
     });
   }
 
   updateFilters(): void {
-    const formValue: Filters = this.filterForm.value;
-
-    const newValue: Filters = {
-      currentPage: formValue.currentPage,
-      entriesPerPage: formValue.entriesPerPage,
-      nameFilter: formValue.nameFilter
-    };
-
-    this.filterService.setState(newValue);
+    const { currentPage, entriesPerPage, nameFilter }: Filters = this.filterForm.value;
+    this.filterService.setState({ currentPage, entriesPerPage, nameFilter });
   }
 }

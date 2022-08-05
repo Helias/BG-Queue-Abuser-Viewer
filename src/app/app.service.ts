@@ -18,8 +18,8 @@ export class AppService {
         }${filters.nameFilter ? '&name=' + filters.nameFilter : ''}`
       )
       .pipe(
-        map(obj => {
-          return obj.map((res, index) => {
+        map(obj =>
+          obj.map((res, index) => {
             const newRow: Row = {
               ...res,
               position: index + 1 + (filters.currentPage - 1) * filters.entriesPerPage
@@ -33,8 +33,8 @@ export class AppService {
             newRow.datetime = formatter.format(datetime);
 
             return newRow;
-          });
-        })
+          })
+        )
       );
   }
 }
