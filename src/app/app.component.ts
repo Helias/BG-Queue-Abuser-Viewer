@@ -4,8 +4,9 @@ import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { switchMap, tap } from 'rxjs';
 import { Row } from './app.model';
 import { AppService } from './app.service';
+import { ColorAndTooltip } from './colors/colors.model';
+import { ColorsService } from './colors/colors.service';
 import { FilterService } from './filter/filter.service';
-import { typeColors } from './legend/legend.component';
 
 @Component({
   selector: 'app-root',
@@ -22,7 +23,7 @@ export class AppComponent implements AfterViewInit {
     'type',
     'datetime'
   ]);
-  readonly typeColors = typeColors;
+  readonly typeColors: ColorAndTooltip = this.colorsService.typeColors;
 
   loading = true;
   dataSource = new MatTableDataSource<Row>([]);
@@ -31,8 +32,9 @@ export class AppComponent implements AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(
+    private readonly appService: AppService,
     private readonly filterService: FilterService,
-    private readonly appService: AppService
+    private readonly colorsService: ColorsService
   ) {}
 
   ngAfterViewInit(): void {
