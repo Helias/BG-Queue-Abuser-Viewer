@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { ColorAndTooltip } from '../colors/colors.model';
-import { ColorsService } from '../colors/colors.service';
+import { typeColors } from '../colors/colors.model';
 
 @Component({
   selector: 'app-legend',
@@ -8,7 +7,5 @@ import { ColorsService } from '../colors/colors.service';
   styleUrls: ['./legend.component.scss']
 })
 export class LegendComponent {
-  readonly typeColors: ColorAndTooltip = this.colorsService.typeColors;
-
-  constructor(private readonly colorsService: ColorsService) {}
+  readonly typeColors = typeColors;
 }
