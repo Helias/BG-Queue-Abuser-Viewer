@@ -1,6 +1,6 @@
-export type ColorAndTooltip = readonly { color: string; tooltip: string }[];
+export type ColorAndTooltip = { color: string; tooltip: string };
 
-export const typeColors: ColorAndTooltip = Object.freeze([
+export const typeColors: readonly ColorAndTooltip[] = Object.freeze([
     {
       color: 'blue',
       tooltip: 'The player abandoned the BG (deserter)'
