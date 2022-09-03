@@ -12,12 +12,12 @@ export class FilterComponent {
   filterForm: FormGroup;
 
   constructor(private readonly filterService: FilterService) {
-    const filterValues: Filters = this.filterService.values$.value;
+    const { currentPage, entriesPerPage, nameFilter }: Filters = this.filterService.values$.value;
 
     this.filterForm = new FormGroup<FiltersFormGroup>({
-      currentPage: new FormControl<Filters['currentPage']>(filterValues.currentPage),
-      entriesPerPage: new FormControl<Filters['entriesPerPage']>(filterValues.entriesPerPage),
-      nameFilter: new FormControl<Filters['nameFilter']>(filterValues.nameFilter)
+      currentPage: new FormControl(currentPage),
+      entriesPerPage: new FormControl(entriesPerPage),
+      nameFilter: new FormControl(nameFilter)
     });
   }
 
