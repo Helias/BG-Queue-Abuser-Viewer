@@ -1,5 +1,4 @@
-import { fakeAsync, TestBed } from '@angular/core/testing';
-import { BehaviorSubject } from 'rxjs';
+import { TestBed, waitForAsync } from '@angular/core/testing';
 import { Filters } from './filter.model';
 
 import { FilterService } from './filter.service';
@@ -12,30 +11,26 @@ describe('FilterService', () => {
     service = TestBed.inject(FilterService);
   });
 
-  it('should have values$', () => {
-    expect(service.values$).toBeDefined();
-    expect(service.values$).toBeInstanceOf(BehaviorSubject<Filters>);
-  });
-
-  it('values$ have the right values', fakeAsync(() => {
+  it('should have the right default values', () => {
     service.values$.subscribe(values => {
       expect(values).toEqual({
         currentPage: 1,
         entriesPerPage: 20
       });
     });
-  }));
-
-  it('should have setState', () => {
-    expect(service.setState).toBeDefined();
-    expect(service.setState).toBeInstanceOf(Function);
   });
 
-  it('should update state successfully', fakeAsync(() => {
+  it('should update state successfully', waitForAsync(() => {
     const before: Filters = {
       currentPage: 1,
       entriesPerPage: 20
     };
+
+    let state = before;
+
+    service.values$.subscribe(values => {
+      expect(values).toEqual(state);
+    });
 
     const after: Filters = {
       currentPage: 2,
@@ -43,12 +38,8 @@ describe('FilterService', () => {
       nameFilter: 'test'
     };
 
-    let state = before;
-    service.values$.subscribe(values => {
-      expect(values).toEqual(state);
-    });
-
     state = after;
+
     service.setState(after);
   }));
 });
