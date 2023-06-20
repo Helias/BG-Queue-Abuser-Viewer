@@ -9,7 +9,7 @@ import { FilterService } from './filter.service';
   styleUrls: ['./filter.component.scss']
 })
 export class FilterComponent {
-  filterForm: FormGroup;
+  filterForm: FormGroup<FiltersFormGroup>;
 
   constructor(private readonly filterService: FilterService) {
     const { currentPage, entriesPerPage, nameFilter }: Filters = this.filterService.values$.value;
@@ -22,7 +22,14 @@ export class FilterComponent {
   }
 
   updateFilters(): void {
-    const { currentPage, entriesPerPage, nameFilter }: Filters = this.filterForm.value;
-    this.filterService.setState({ currentPage, entriesPerPage, nameFilter });
+    const { currentPage, entriesPerPage, nameFilter } = this.filterForm.value;
+
+    if (currentPage != undefined && entriesPerPage != undefined) {
+      this.filterService.setState({
+        currentPage,
+        entriesPerPage,
+        nameFilter: nameFilter ?? undefined
+      });
+    }
   }
 }
