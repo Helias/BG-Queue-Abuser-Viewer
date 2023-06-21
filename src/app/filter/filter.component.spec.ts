@@ -40,11 +40,7 @@ describe('FilterComponent', () => {
     component.filterForm.setValue(withoutNameFilter);
     component.updateFilters();
 
-    expect(component.filterForm.value).toEqual({
-      currentPage: withoutNameFilter.currentPage,
-      entriesPerPage: withoutNameFilter.entriesPerPage,
-      nameFilter: null
-    });
+    expect(component.filterForm.value).toEqual(withoutNameFilter);
   });
 
   it('should update filter state with name filter', () => {
@@ -57,10 +53,6 @@ describe('FilterComponent', () => {
     component.filterForm.setValue(withNameFilter);
     component.updateFilters();
 
-    expect(component.filterForm.value).toEqual({
-      currentPage: withNameFilter.currentPage,
-      entriesPerPage: withNameFilter.entriesPerPage,
-      nameFilter: withNameFilter.nameFilter
-    });
+    expect(component.filterForm.value).toEqual(withNameFilter);
   });
 });
