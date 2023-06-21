@@ -9,7 +9,7 @@ import { FilterService } from './filter.service';
   styleUrls: ['./filter.component.scss']
 })
 export class FilterComponent {
-  filterForm: FormGroup<FiltersFormGroup>;
+  readonly filterForm: FormGroup<FiltersFormGroup>;
 
   constructor(private readonly filterService: FilterService) {
     const { currentPage, entriesPerPage, nameFilter }: Filters = this.filterService.values$.value;
