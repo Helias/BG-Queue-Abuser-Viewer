@@ -3,12 +3,12 @@
   mat-mini-fab
   color="primary"
   aria-label="Legend button"
-  [matMenuTriggerFor]="menu"
+  [matMenuTriggerFor]="legendMenu"
 >
   <mat-icon class="material-symbols-outlined">legend_toggle</mat-icon>
 </button>
 
-<mat-menu #menu="matMenu" xPosition="before" yPosition="above">
+<mat-menu #legendMenu="matMenu" xPosition="before" yPosition="above">
   <span class="legend__title">Legend</span>
   <div class="legend__flex">
     <div class="legend__dot-wrapper" *ngFor="let color of typeColors">
