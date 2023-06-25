@@ -29,7 +29,7 @@ $space: 10px;
     align-items: center;
 
     > .dot {
-      margin: $space / 2 $space $space / 2 0;
+      margin: calc($space / 2) $space calc($space / 2) 0;
     }
   }
 }
