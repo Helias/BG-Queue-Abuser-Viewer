@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { switchMap, tap } from 'rxjs';
@@ -12,7 +12,7 @@ import { FilterService } from './filter/filter.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements AfterViewInit {
+export class AppComponent implements OnInit {
   readonly displayedColumns: readonly (keyof Row)[] = Object.freeze([
     'position',
     'guid',
@@ -35,7 +35,7 @@ export class AppComponent implements AfterViewInit {
     private readonly filterService: FilterService,
   ) {}
 
-  ngAfterViewInit(): void {
+  ngOnInit(): void {
     this.dataSource.sort = this.sort;
 
     this.filterService.values$
