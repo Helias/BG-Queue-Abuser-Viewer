@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { FilterComponent } from './filter.component';
+import { Filters } from './filter.model';
 
 describe('FilterComponent', () => {
   let component: FilterComponent;
@@ -30,29 +31,28 @@ describe('FilterComponent', () => {
     expect(component.filterForm.value).toEqual(initialState);
   });
 
-  it('should update filter state without name filter', () => {
-    const withoutNameFilter: Required<typeof component.filterForm.value> = {
+  it('should update filter state', () => {
+    const defaultFilter: Filters = {
       currentPage: 2,
-      entriesPerPage: 50,
-      nameFilter: null
+      entriesPerPage: 50
     };
 
-    component.filterForm.setValue(withoutNameFilter);
-    component.updateFilters();
+    const filters: ReadonlyArray<Required<typeof component.filterForm.value>> = [
+      {
+        ...defaultFilter,
+        nameFilter: null
+      },
+      {
+        ...defaultFilter,
+        nameFilter: 'test'
+      }
+    ];
 
-    expect(component.filterForm.value).toEqual(withoutNameFilter);
-  });
+    filters.forEach(filter => {
+      component.filterForm.setValue(filter);
+      component.updateFilters();
 
-  it('should update filter state with name filter', () => {
-    const withNameFilter: Required<typeof component.filterForm.value> = {
-      currentPage: 2,
-      entriesPerPage: 50,
-      nameFilter: 'test'
-    };
-
-    component.filterForm.setValue(withNameFilter);
-    component.updateFilters();
-
-    expect(component.filterForm.value).toEqual(withNameFilter);
+      expect(component.filterForm.value).toEqual(filter);
+    });
   });
 });
