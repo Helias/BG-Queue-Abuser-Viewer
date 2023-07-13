@@ -26,9 +26,14 @@ describe('AppService', () => {
     datetime: '2023/04/02'
   };
 
+  const formatter = Intl.DateTimeFormat(undefined, {
+    dateStyle: 'short',
+    timeStyle: 'long'
+  });
+
   const resultingRow: APIResults & { position: number } = {
     ...sendingRow,
-    datetime: '02/04/2023, 00:00:00 CEST',
+    datetime: formatter.format(new Date(sendingRow.datetime)),
     position: 1
   };
 
@@ -46,7 +51,7 @@ describe('AppService', () => {
     });
 
     const req = httpTestingController.expectOne(
-      `api/characters/battleground_deserters/${
+      `http://localhost:8080/api/characters/battleground_deserters/${
         defaultFilters.entriesPerPage
       }?from=${defaultFilters.currentPage - 1}`
     );
@@ -75,7 +80,7 @@ describe('AppService', () => {
     });
 
     const req = httpTestingController.expectOne(
-      `api/characters/battleground_deserters/${filter.entriesPerPage}?from=${
+      `http://localhost:8080/api/characters/battleground_deserters/${filter.entriesPerPage}?from=${
         filter.currentPage - 1
       }${filter.nameFilter ? '&name=' + filter.nameFilter : ''}`
     );
