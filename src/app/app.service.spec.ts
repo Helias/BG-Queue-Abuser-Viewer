@@ -51,9 +51,9 @@ describe('AppService', () => {
     });
 
     const req = httpTestingController.expectOne(
-      `http://localhost:8080/api/characters/battleground_deserters/${
-        defaultFilters.entriesPerPage
-      }?from=${defaultFilters.currentPage - 1}`
+      `api/characters/battleground_deserters/${defaultFilters.entriesPerPage}?from=${
+        defaultFilters.currentPage - 1
+      }`
     );
 
     req.flush([sendingRow]);
@@ -80,7 +80,7 @@ describe('AppService', () => {
     });
 
     const req = httpTestingController.expectOne(
-      `http://localhost:8080/api/characters/battleground_deserters/${filter.entriesPerPage}?from=${
+      `api/characters/battleground_deserters/${filter.entriesPerPage}?from=${
         filter.currentPage - 1
       }${filter.nameFilter ? '&name=' + filter.nameFilter : ''}`
     );
