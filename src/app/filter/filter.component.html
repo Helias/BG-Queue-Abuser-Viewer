@@ -1,0 +1,30 @@
+<form class="filter__form" [formGroup]="filterForm" (ngSubmit)="updateFilters()">
+  <div class="filter__wrapper">
+    <label for="current-page">Page:</label>
+    <input
+      id="current-page"
+      class="filter__input filter__input--small"
+      type="number"
+      min="1"
+      formControlName="currentPage"
+    />
+  </div>
+
+  <div class="filter__wrapper">
+    <label for="entriesPerPage">Entries:</label>
+    <input
+      id="entriesPerPage"
+      class="filter__input filter__input--small"
+      type="number"
+      max="100"
+      min="5"
+      formControlName="entriesPerPage"
+    />
+  </div>
+
+  <input class="filter__input" placeholder="Filter by name" formControlName="nameFilter" />
+
+  <button class="filter__button" matTooltip="Apply filters">
+    <mat-icon class="material-symbols-outlined">check</mat-icon>
+  </button>
+</form>

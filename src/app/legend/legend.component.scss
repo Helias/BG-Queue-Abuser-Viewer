@@ -1,0 +1,35 @@
+@import '../../variables.scss';
+
+$space: 10px;
+
+.legend {
+  &-button {
+    position: fixed;
+    bottom: $space;
+    right: $space;
+  }
+
+  &__title {
+    display: block;
+    margin-left: $space;
+    font-size: larger;
+    text-align: center;
+    color: $accent;
+  }
+
+  &__flex {
+    display: flex;
+    flex-direction: column;
+    padding: $space;
+    color: $text-color;
+  }
+
+  &__dot-wrapper {
+    display: flex;
+    align-items: center;
+
+    > .dot {
+      margin: calc($space / 2) $space calc($space / 2) 0;
+    }
+  }
+}

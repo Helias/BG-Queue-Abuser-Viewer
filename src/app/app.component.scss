@@ -1,0 +1,62 @@
+@import '../variables.scss';
+
+$padding: 10px;
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.toolbar {
+  justify-content: space-around;
+
+  &__title {
+    font-size: 2em;
+    padding: $padding;
+  }
+
+  &__options {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.progress-bar {
+  margin-top: 2px;
+}
+
+.table {
+  width: 100%;
+  margin: 10px 0;
+}
+
+.credits {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: $padding;
+
+  > hr {
+    width: 100%;
+    color: $yellow;
+  }
+
+  > strong {
+    color: $yellow;
+  }
+
+  > a {
+    text-decoration: none;
+  }
+
+  > a:link,
+  a:visited {
+    color: inherit;
+  }
+}
+
+.mat-row:nth-child(odd) {
+  background-color: rgba(255, 255, 255, 0.1);
+}

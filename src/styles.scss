@@ -1,0 +1,57 @@
+/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+@import './variables.scss';
+
+$my-palette: mat.$teal-palette;
+$my-primary: mat.define-palette(mat.$teal-palette, 800, 300, 900);
+$my-accent: mat.define-palette(mat.$cyan-palette, A200, A100, A400);
+
+$my-theme: mat.define-dark-theme(
+  (
+    color: (
+      primary: $my-primary,
+      accent: $my-accent
+    )
+  )
+);
+
+@include mat.all-component-themes($my-theme);
+
+body {
+  margin: 0;
+  background-color: $background;
+}
+
+.mat-menu-panel {
+  max-width: none !important;
+}
+
+.dot {
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  box-shadow: inset 0 0 5px 0 rgba(0, 0, 0, 0.5);
+
+  &--red {
+    background-color: $red;
+  }
+
+  &--orange {
+    background-color: $orange;
+  }
+
+  &--yellow {
+    background-color: $yellow;
+  }
+
+  &--blue {
+    background-color: $blue;
+  }
+
+  &--grey {
+    background-color: $grey;
+  }
+}

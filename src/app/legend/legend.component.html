@@ -1,0 +1,19 @@
+<button
+  class="legend-button"
+  mat-mini-fab
+  color="primary"
+  aria-label="Legend button"
+  [matMenuTriggerFor]="legendMenu"
+>
+  <mat-icon class="material-symbols-outlined">legend_toggle</mat-icon>
+</button>
+
+<mat-menu #legendMenu="matMenu" xPosition="before" yPosition="above">
+  <span class="legend__title">Legend</span>
+  <div class="legend__flex">
+    <div class="legend__dot-wrapper" *ngFor="let color of typeColors">
+      <div [ngClass]="['dot', 'dot--' + color.color]"></div>
+      <span>{{ color.tooltip }}</span>
+    </div>
+  </div>
+</mat-menu>
